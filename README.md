@@ -1,5 +1,5 @@
 # EarthquakeAPI
-🗄️ API for earthquake dashboard
+🗄️ API for earthquake dashboard using Python & MySQL
 - This project is still under development
 
 ## Source of data
