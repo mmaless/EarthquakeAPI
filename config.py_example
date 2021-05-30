@@ -1,0 +1,62 @@
+GEOCODING_API = ''
+HOST = ''
+DATABASE = ''
+USER = ''
+PASSWORD = ''
+# CRITICAL 50
+# ERROR 40
+# WARNING 30
+# INFO 20
+# DEBUG 10
+# NOTSET 0
+LOGGING_LEVEL = 10
+
+
+class Config(object):
+    """Parent configuration class."""
+    DEBUG = False
+    CSRF_ENABLED = True
+    # SECRET = os.getenv('SECRET')
+    # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    GEOCODING_API = ''
+    HOST = ''
+    DATABASE = ''
+    USER = ''
+    PASSWORD = ''
+    # CRITICAL 50
+    # ERROR 40
+    # WARNING 30
+    # INFO 20
+    # DEBUG 10
+    # NOTSET 0
+    LOGGING_LEVEL = 10
+
+
+class DevelopmentConfig(Config):
+    """Configurations for Development."""
+    DEBUG = True
+
+
+class TestingConfig(Config):
+    """Configurations for Testing, with a separate test database."""
+    TESTING = True
+    DEBUG = True
+
+
+class StagingConfig(Config):
+    """Configurations for Staging."""
+    DEBUG = True
+
+
+class ProductionConfig(Config):
+    """Configurations for Production."""
+    DEBUG = False
+    TESTING = False
+
+
+app_config = {
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'staging': StagingConfig,
+    'production': ProductionConfig,
+}
