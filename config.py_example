@@ -3,6 +3,7 @@ HOST = ''
 DATABASE = ''
 USER = ''
 PASSWORD = ''
+PORT = 0
 # CRITICAL 50
 # ERROR 40
 # WARNING 30
@@ -23,6 +24,7 @@ class Config(object):
     DATABASE = ''
     USER = ''
     PASSWORD = ''
+    PORT = 0
     # CRITICAL 50
     # ERROR 40
     # WARNING 30

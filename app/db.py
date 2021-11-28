@@ -1,16 +1,17 @@
-import mysql.connector
+import mariadb
 import googlemaps
 
 from app.logger import log
-from config import HOST, DATABASE, USER, PASSWORD, GEOCODING_API
+from config import HOST, DATABASE, PORT, USER, PASSWORD, GEOCODING_API
 from app.objects import Event, Location
 
 
 def connect():
     try:
-        connection = mysql.connector.connect(host=HOST,
+        connection = mariadb.connect(host=HOST,
                                              database=DATABASE,
                                              user=USER,
+                                             port=PORT,
                                              password=PASSWORD)
         log.info('Connection opened')
         return connection
@@ -39,10 +40,9 @@ def insert_events(records):
     except Exception as error:
         log.error('Failed to insert into events table {}'.format(error))
     finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            log.info('Connection closed')
+        cursor.close()
+        connection.close()
+        log.info('Connection closed')
 
 
 def get_events(location, start_time, end_time, min_mag):
@@ -65,10 +65,9 @@ def get_events(location, start_time, end_time, min_mag):
     except Exception as error:
         log.error('Failed to get events {}'.format(error))
     finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            log.info('Connection closed')
+        cursor.close()
+        connection.close()
+        log.info('Connection closed')
 
 
 def insert_location(record):
@@ -87,10 +86,9 @@ def insert_location(record):
     except Exception as error:
         log.error('Failed to insert into locations table {}'.format(error))
     finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            log.info('Connection closed')
+        cursor.close()
+        connection.close()
+        log.info('Connection closed')
 
 
 def get_location(location_name):
@@ -124,7 +122,6 @@ def get_location(location_name):
     except Exception as error:
         log.error('Failed to get location geocode {}'.format(error))
     finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            log.info('Connection closed')
+        cursor.close()
+        connection.close()
+        log.info('Connection closed')

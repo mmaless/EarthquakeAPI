@@ -24,7 +24,7 @@ def json_response(fn):
 @api_bp.route("/")
 @api_bp.route("/status")
 def status():
-    return '', http.HTTPStatus.OK
+    return 'Ok!', http.HTTPStatus.OK
 
 
 @api_bp.route('/refresh', methods=['POST'])
