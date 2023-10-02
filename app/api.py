@@ -62,7 +62,8 @@ def refresh():
             event_mag = event['properties']['mag']
             event_place = event['properties']['place']
             event_status = event['properties']['status']
-            event_time = datetime.fromtimestamp(event['properties']['time'] / 1000.0)
+            event_time = datetime.fromtimestamp(
+                event['properties']['time'] / 1000.0)
             event_type = event['properties']['type']
             event_updated = datetime.fromtimestamp(
                 event['properties']['updated'] / 1000.0)
@@ -86,10 +87,12 @@ def events():
         min_mag = float(request.args.get('min'))
         if None not in (location, start_time, end_time, min_mag):
             date_format = '%Y-%m-%d %H:%M:%S'
-            delta = datetime.strptime(end_time, date_format) - datetime.strptime(start_time, date_format)
+            delta = datetime.strptime(
+                end_time, date_format) - datetime.strptime(start_time, date_format)
             eq_location = get_location(location)
             if eq_location.name:
-                eq_events = get_events(eq_location, start_time, end_time, min_mag)
+                eq_events = get_events(
+                    eq_location, start_time, end_time, min_mag)
             else:
                 return '', http.HTTPStatus.BAD_REQUEST
             if eq_events:
@@ -117,13 +120,15 @@ def events():
                 total_count = len(eq_events)
                 recent_mag = eq_events[total_count - 1]['mag']
                 recent_time = eq_events[total_count - 1]['time']
-                total_days = 'Nº Earthquakes since ' + str(delta.days) + ' day/s'
+                total_days = 'Nº Earthquakes since ' + \
+                    str(delta.days) + ' day/s'
 
                 events_max = {'value': max_mag, 'time': max_time}
                 events_min = {'value': min_mag, 'time': min_time}
                 events_recent = {'value': recent_mag, 'time': recent_time}
                 events_total = {'value': total_count, 'time': total_days}
-                events_count = {'low': low_count, 'medium': medium_count, 'high': high_count}
+                events_count = {'low': low_count,
+                                'medium': medium_count, 'high': high_count}
                 map_location = {'lat': eq_location.lat, 'lng': eq_location.lng}
 
                 response = {'events': eq_events, 'overview': {'max': events_max, 'min': events_min,
